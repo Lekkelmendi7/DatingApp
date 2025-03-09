@@ -12,6 +12,9 @@ builder.Services.AddDbContext<DataContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddEndpointsApiExplorer();  // Shton Explorer për API
+builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 
@@ -22,7 +25,17 @@ var app = builder.Build();
     DataContext.Seed(context);
 }*/
 
-app.UseAuthorization();
+//app.UseAuthorization();
+
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+
+
 
 app.MapControllers();
 

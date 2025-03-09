@@ -21,7 +21,7 @@ namespace API.Controllers
        {
             var users = await context.Users.ToListAsync();
 
-            return Ok(users);
+            return users;
        }
 
        [HttpGet("{id:int}")]
@@ -31,7 +31,7 @@ namespace API.Controllers
             
             if(user == null) return NotFound();
             
-            return Ok(user);
+            return user;
        }
     }
 }
