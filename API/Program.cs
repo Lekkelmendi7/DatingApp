@@ -16,16 +16,11 @@ builder.Services.AddEndpointsApiExplorer();  // Shton Explorer për API
 builder.Services.AddSwaggerGen();
 
 
+builder.Services.AddCors();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 
-/*using (var scope = app.Services.CreateScope()){
-    var context = scope.ServiceProvider.GetRequiredService<DataContext>();
-    DataContext.Seed(context);
-}*/
-
-//app.UseAuthorization();
 
 
 if (app.Environment.IsDevelopment())
@@ -34,9 +29,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
-
-
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod()
+        .WithOrigins("http://localhost:4200", "https://localhost:4200"));
+        
 app.MapControllers();
 
 app.Run();
